@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <headers/>
+    <headers v-bind:seller='sellers'/>
     <div class="nav border-1px">
       <div class="nav-item">
         <router-link to="/eleme/goods">商品</router-link>
@@ -12,21 +12,27 @@
         <router-link to="/eleme/seller">商家</router-link>
       </div>
     </div>
-    <router-view><div class="content">
-      内容区
-      
-    </div></router-view>
-    
+    <router-view><div class="content"></div></router-view>
   </div>
 </template>
 
 <script>
-import api from './axios/api'
+import axios from './axios/config'
 import Headers from './components/header/header'
 export default {
   name: 'App',
   components:{
     Headers
+  },
+  data(){
+    return {
+      sellers:{}
+    }
+  },
+mounted () {
+    axios.get('/seller').then(res=>{
+      this.sellers=res
+    })
   }
 }
 </script>
