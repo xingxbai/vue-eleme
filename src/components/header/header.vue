@@ -35,6 +35,9 @@
                 >
             </div>
         </div>
+        <div class="background">
+            <img :src="seller.avatar" width="100%" height="100%">
+        </div>
     </div>
 </template>
 
@@ -53,9 +56,10 @@ export default {
 <style lang='stylus'>
 @import '../../common/styles/mixin.styl'
 .header
+    position relative
     padding:24px 0 0 0px
     color:#fff
-    background #888
+    background rgba(7,17,27,0.5)
     .content-wrapper
         position relative
         font-size:0
@@ -151,5 +155,14 @@ export default {
             right 14px
             bottom 0
             line-height 30px
+    .background
+        position absolute
+        top 0
+        left 0
+        width 100%
+        height 100%
+        z-index -1
+        filter blur(10px)
+
 
 </style>
