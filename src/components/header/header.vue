@@ -125,7 +125,7 @@ export default {
     .bulletin-wrapper
         position relative
         margin-top 18px
-        padding 0 45px 0 12px
+        padding 0 55px 0 12px
         font-size 10px
         font-weight 100
         height 28px
@@ -145,10 +145,11 @@ export default {
             margin 8px 4px 0 0
         .bulletin-text
             display inline-block
+            paddign-right 16px
         .bulletin-right
             position absolute
-            right 12px
+            right 14px
             bottom 0
-            line-height 28px
+            line-height 30px
 
 </style>
