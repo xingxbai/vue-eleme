@@ -32,6 +32,7 @@ export default {
 </script>
 
 <style lang='stylus'>
+
 @import './common/styles/mixin.styl'
 #app
   .nav
