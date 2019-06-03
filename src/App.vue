@@ -34,7 +34,9 @@ export default {
 <style lang='stylus'>
 #app
   .nav
+    position relative
     display flex
+    width 100%
     height 40px
     line-height 40px
     .nav-item
@@ -47,4 +49,5 @@ export default {
         color:rgb(77,85,93)
         &.active
           color:rgb(240,20,20)
+    border-bottom 1px solid rgba(7,17,27,0.1)
 </style>
