@@ -2,7 +2,7 @@
     <div class="goods">
         <div class="goods-nav" ref="menu" >
             <ul>
-                <li class="nav-item" v-for="item in goods" :key="item.name">
+                <li :class="['nav-item','nav-click:nav-item-hook']" v-for="(item,index) in goods" :key="item.name" v-on:click="navScroll(index)">
                     <span>{{item.name}}</span>
                 </li>
             </ul>
@@ -39,7 +39,8 @@
 
 <script>
 const options = {
-  scrollY: true // 因为scrollY默认为true，其实可以省略
+    scrollY: true,
+    click:true
 }
 import axios from '../../axios/config'
 import Bscroll from 'better-scroll'
@@ -61,6 +62,11 @@ methods:{
 _initScroll(){
     this.menuScroll=new Bscroll(this.$refs.menu,options)
     this.foodScroll=new Bscroll(this.$refs.food,options)
+},
+navScroll(index){
+    let foodList=this.$refs.food.getElementsByClassName('goods-item')
+    let el=foodList[index]
+    this.foodScroll.scrollToElement(el,300)
 }
 }
 }
