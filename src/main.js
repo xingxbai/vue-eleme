@@ -7,6 +7,7 @@ import axios from './axios/config'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import './common/styles/index.styl'
+import './common/font/iconfont.css'
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
