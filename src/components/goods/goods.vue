@@ -2,7 +2,7 @@
     <div class="goods">
         <div class="goods-nav" ref="menu" >
             <ul>
-                <li :class="['nav-item','nav-click:nav-item-hook']" v-for="(item,index) in goods" :key="item.name" v-on:click="navScroll(index)">
+                <li class='nav-item' :class="{'current':currentIndex===index}"  v-for="(item,index) in goods" :key="item.name" v-on:click="navScroll(index)">
                     <span>{{item.name}}</span>
                 </li>
             </ul>
@@ -47,7 +47,10 @@ import Bscroll from 'better-scroll'
 export default {
     data(){
         return {
-            goods:[]
+            goods:[],
+            listHeight:[],
+            scrollY:0,
+            showcurrent:false
         }
     },
     mounted(){
@@ -55,18 +58,45 @@ export default {
     this.goods=res
     this.$nextTick(()=>{
         this._initScroll()
+        this._calculateHeight()
     })
     })
+},
+computed:{
+    currentIndex(){
+        for(let i=0;i<=this.listHeight.length;i++){
+            let height1=this.listHeight[i]
+            let height2=this.listHeight[i+1]
+            if(!height2||(this.scrollY>=height1 && this.scrollY<height2)){
+                return i
+            }
+        }
+        return 0
+    }
 },
 methods:{
 _initScroll(){
     this.menuScroll=new Bscroll(this.$refs.menu,options)
-    this.foodScroll=new Bscroll(this.$refs.food,options)
+    this.foodScroll=new Bscroll(this.$refs.food,{probeType:3})
+    this.foodScroll.on('scroll',(pos)=>{
+        this.scrollY=Math.abs(Math.round(pos.y))
+    })
+},
+_calculateHeight(){
+    let foodList=this.$refs.food.getElementsByClassName('goods-item')
+    let height=0
+    this.listHeight.push(height)
+    for(let i=0;i<=foodList.length;i++){
+        let item=foodList[i]
+        height+=item.clientHeight
+        this.listHeight.push(height)
+    }
 },
 navScroll(index){
     let foodList=this.$refs.food.getElementsByClassName('goods-item')
     let el=foodList[index]
     this.foodScroll.scrollToElement(el,300)
+    this.showcurrent=true
 }
 }
 }
@@ -98,10 +128,12 @@ navScroll(index){
             display flex
             align-items:center
             justify-content:center
-            width 54px
+            width 70px
             margin 0 auto
             height 54px
             border-1px(rgba(7,17,27,0.1))
+            &.current
+                background #fff
     .goods-content
         flex 1
         overflow hidden
