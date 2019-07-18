@@ -30,6 +30,7 @@ export default {
     }
   },
 mounted () {
+    alert("爱吃外卖的王来娇，做个软件给你过过嘴瘾。。。")
     axios.get('/seller').then(res=>{
       this.sellers=res
     })
